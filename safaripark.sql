@@ -8,7 +8,7 @@ DROP TABLE IF EXISTS assignment;
 CREATE TABLE staff (
     id SERIAL PRIMARY KEY, --REFERENCES assignment(employeeId),
     name VARCHAR,
-    employeeNumber INT
+    employeeNumber INT 
 );
 
 CREATE TABLE enclosure (
@@ -18,6 +18,7 @@ CREATE TABLE enclosure (
     closedForMaintenance BOOLEAN
 );
 
+
 CREATE TABLE animal (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255),
@@ -26,13 +27,13 @@ CREATE TABLE animal (
     enclosure_id INT REFERENCES enclosure(id)
 );
 
-
 CREATE TABLE assignment (
     id SERIAL PRIMARY KEY,
-    employeeId INT, REFERENCES staff(id),
-    enclosureId INT, REFERENCES enclosure(id),
+    employeeId INT REFERENCES staff(id),
+    enclosureId INT REFERENCES enclosure(id),
     day VARCHAR(255)
 );
+
 
 INSERT INTO enclosure (name, capacity, closedForMaintenance) VALUES ('big cat field', 20, 'FALSE');
 INSERT INTO enclosure (name, capacity, closedForMaintenance) VALUES ('tiger playground', 20, 'FALSE');
@@ -56,4 +57,7 @@ INSERT INTO assignment (employeeId, enclosureId, day) VALUES (3, 1, 'Tuesday');
 
 -- SELECT animal.name, enclosure.name FROM animal LEFT JOIN enclosure ON animal.enclosure_id = enclosure.id;
 
--- 
+-- Select staff.name, enclosure.name 
+-- from staff, enclosure
+-- left join assignment on staff.id = assignment.employeeid
+-- where enclosure.name = 'big cat field';
